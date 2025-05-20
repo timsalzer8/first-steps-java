@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Waehrungsrechner:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Waehrungsrechner_jar</output-path>
+    <root id="archive" name="Waehrungsrechner.jar">
+      <element id="module-output" name="JavaTutorial" />
+    </root>
+  </artifact>
+</component>
