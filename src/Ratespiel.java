@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,30 +13,49 @@ public class Ratespiel {
         System.out.println("Willkommen beim Ratespiel!");
         System.out.println("Du hast 3 Versuche und glaub ja nicht es gibt irgendwelche Tipps!");
         System.out.println("");
-        startGame();
         Scanner scanner = new Scanner(System.in);
+        boolean playAgain = true;
+        while (playAgain) {
+            tries = 0;
+            guessedCorrectly = false;
+            myNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
+            while (tries < 3 && !guessedCorrectly) {
+                nextRound(scanner);
+            }
+            System.out.println("Spiel beendet.");
+            System.out.println("Möchtest du noch einmal spielen? (j/n)");
+            String replay = scanner.next();
+            scanner.nextLine();
+            if (replay.equals("j")) {
+            } else {
+                playAgain = false;
+                System.out.println("Auf Wiedersehen!");
+            }
 
-    }
-
-    public static void  startGame(Scanner scanner) {
-        tries = 0;
-        while (tries < 3 && !guessedCorrectly) {
-            nextRound(scanner);}
+        }
         scanner.close();
-        System.out.println("Spiel beendet.");
-        System.out.println("Möchtest du noch einmal spielen? (j/n)");
     }
 
     public static void nextRound(Scanner scanner) {
+        int number = 0;
         tries = tries +1;
         if (tries <= 3)
         System.out.println("Gib eine Zahl zwischen 1 und 10 ein: ");
         if (tries <= 3)
         System.out.println("Pssst, hier ein kleiner Tipp: " + myNumber);
-        int number = scanner.nextInt();
+        if (!scanner.hasNextInt()) {
+        System.out.println("Bitte gib eine Zahl ein!");
+        scanner.nextLine();
+        tries --;
+        return;
+        }
+        else {
+            number = scanner.nextInt();
+        }
         scanner.nextLine();
         guess(number);
-    }
+        }
+
 
     public static void guess(int number) {
         if (number == myNumber) {
